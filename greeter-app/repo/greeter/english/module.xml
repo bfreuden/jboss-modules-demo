@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module xmlns="urn:jboss:module:1.6" name="greeter.english" version="1.0-SNAPSHOT">
+    <resources>
+        <resource-root path="lib/greeter-impl-1.0-SNAPSHOT.jar"/>
+    </resources>
+    <dependencies>
+    	<system>
+    		<paths>
+    			<path name="greeter/api" />
+    		</paths>
+    	</system>
+    </dependencies>
+    <permissions>
+        <grant permission="java.io.FilePermission" name="${java.io.tmpdir}/-" actions="read,write,delete"/>
+    </permissions>
+</module>

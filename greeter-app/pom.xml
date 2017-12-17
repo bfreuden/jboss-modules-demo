@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>modules.demo</groupId>
+		<artifactId>greeter-modules-demo</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+	<artifactId>greeter-app</artifactId>
+	<dependencies>
+		<dependency>
+			<groupId>modules.demo</groupId>
+			<artifactId>greeter-api</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.modules</groupId>
+			<artifactId>jboss-modules</artifactId>
+			<version>1.7.0.Beta2</version>
+		</dependency>
+		<!-- test deps -->
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.6</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+	<build>
+		<plugins>
+			<!-- Copy the module jar into the repository directory -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>3.0.2</version>
+				<executions>
+					<execution>
+						<id>copy</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<artifactItems>
+						<artifactItem>
+							<groupId>modules.demo</groupId>
+							<artifactId>greeter-impl</artifactId>
+							<version>${project.version}</version>
+							<type>jar</type>
+							<outputDirectory>repo/greeter/english/lib</outputDirectory>
+						</artifactItem>
+						<artifactItem>
+							<groupId>modules.demo</groupId>
+							<artifactId>greeter-impl2</artifactId>
+							<version>${project.version}</version>
+							<type>jar</type>
+							<outputDirectory>repo/greeter/english/lib</outputDirectory>
+						</artifactItem>
+					</artifactItems>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
