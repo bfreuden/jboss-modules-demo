@@ -110,7 +110,7 @@ The module descriptor (see below) states that:
 
 Finally the application is creating instances of EnglishGreeter in 2 different ways:
 
-1. using class.forName and newInstance
+1. using loadClass() and newInstance()
 
 2. using SPI
 
