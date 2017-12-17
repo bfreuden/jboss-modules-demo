@@ -117,22 +117,21 @@ Finally the application is creating instances of EnglishGreeter in 2 different w
 2. using SPI
 
 ```java
+try (LocalModuleLoader moduleLoader = new LocalModuleLoader(new File[] { new File("repo") })) {
+   
+    // load module
+    Module module = moduleLoader.loadModule("greeter.english");
 
-	try (LocalModuleLoader moduleLoader = new LocalModuleLoader(new File[] { new File("repo") })) {
-	   
-	    // load module
-	    Module module = moduleLoader.loadModule("greeter.english");
-	
-	    // get instance by class by name
-	    ModuleClassLoader classLoader = module.getClassLoader();
-	    Greeter englishGreeter = (Greeter)classLoader.loadClass("greeter.impl.EnglishGreeter").newInstance();
-	    System.out.println(englishGreeter.sayHello("World"));
-	   
-	    // get instance by SPI
-	    ServiceLoader<Greeter> greeters = module.loadService(Greeter.class);
-	    for (Greeter greeter : greeters)
-	        System.out.println(greeter.sayHello("World"));
-	}
+    // get instance by class by name
+    ModuleClassLoader classLoader = module.getClassLoader();
+    Greeter englishGreeter = (Greeter)classLoader.loadClass("greeter.impl.EnglishGreeter").newInstance();
+    System.out.println(englishGreeter.sayHello("World"));
+   
+    // get instance by SPI
+    ServiceLoader<Greeter> greeters = module.loadService(Greeter.class);
+    for (Greeter greeter : greeters)
+        System.out.println(greeter.sayHello("World"));
+}
 ```
 
 
