@@ -59,9 +59,9 @@ public class EnglishGreeter implements Greeter {
 ```
 
 ## greeter-app Maven module
-This Maven module is actually containing the source code of the demo, a **repo** directory containing 1 JBoss Module, and hacked source code of JBoss Modules (in the *org.jboss.modules package*).
+This Maven module is actually containing the source code of the demo, a **repo** directory containing 1 JBoss Module, and hacked source code of JBoss Modules (in the *org.jboss.modules* package).
 
-The pom of this Maven module is putting the **greeter-impl** and **greeter-impl** jar files into the repo directory, however Maven dependencies of this project are only **jboss-modules** and **greeter-api**:
+The pom of this Maven module is putting the **greeter-impl** and **greeter-impl2** jar files into the repo directory, however Maven dependencies of this project are only **jboss-modules** and **greeter-api**:
 
 ```xml
 
@@ -79,7 +79,7 @@ The pom of this Maven module is putting the **greeter-impl** and **greeter-impl*
 ```
 
 
-The module descriptor states  that:
+The module descriptor (see below) states that:
 
 1. the module source code is inside the jar built by Maven,
 
@@ -118,28 +118,28 @@ Finally the application is creating instances of EnglishGreeter in 2 different w
 
 ```java
 
-        try (LocalModuleLoader moduleLoader = new LocalModuleLoader(new File[] { new File("repo") })) {
-           
-            // load module
-            Module module = moduleLoader.loadModule("greeter.english");
-
-            // get instance by class by name
-            ModuleClassLoader classLoader = module.getClassLoader();
-            Greeter englishGreeter = (Greeter)classLoader.loadClass("greeter.impl.EnglishGreeter").newInstance();
-            System.out.println(englishGreeter.sayHello("World"));
-           
-            // get instance by SPI
-            ServiceLoader<Greeter> greeters = module.loadService(Greeter.class);
-            for (Greeter greeter : greeters)
-                System.out.println(greeter.sayHello("World"));
-        }
+	try (LocalModuleLoader moduleLoader = new LocalModuleLoader(new File[] { new File("repo") })) {
+	   
+	    // load module
+	    Module module = moduleLoader.loadModule("greeter.english");
+	
+	    // get instance by class by name
+	    ModuleClassLoader classLoader = module.getClassLoader();
+	    Greeter englishGreeter = (Greeter)classLoader.loadClass("greeter.impl.EnglishGreeter").newInstance();
+	    System.out.println(englishGreeter.sayHello("World"));
+	   
+	    // get instance by SPI
+	    ServiceLoader<Greeter> greeters = module.loadService(Greeter.class);
+	    for (Greeter greeter : greeters)
+	        System.out.println(greeter.sayHello("World"));
+	}
 ```
 
 
 # Problems
 
 
-I've not been able to find a way to unload the module
+I've not been able to find a way to unload a module.
 
 After adding a hack enabling to call a protected method of JBoss Modules, I've been able to unload the module but it leaves the **greeter-impl** jar file open.
 
