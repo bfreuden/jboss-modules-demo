@@ -23,7 +23,7 @@ The demo consists in 4 Maven modules.
 
 
 ## greeter-api Maven module
-A single and imple interface:
+A single and simple interface:
 ```java
 public interface Greeter {
 
