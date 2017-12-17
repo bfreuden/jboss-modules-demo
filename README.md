@@ -120,7 +120,7 @@ try (LocalModuleLoader moduleLoader = new LocalModuleLoader(new File[] { new Fil
     // load module
     Module module = moduleLoader.loadModule("greeter.english");
 
-    // get instance by class by name
+    // get instance by class name
     ModuleClassLoader classLoader = module.getClassLoader();
     Greeter englishGreeter = (Greeter)classLoader.loadClass("greeter.impl.EnglishGreeter").newInstance();
     System.out.println(englishGreeter.sayHello("World"));
