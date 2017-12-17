@@ -64,18 +64,16 @@ This Maven module is actually containing the source code of the demo, a **repo**
 The pom of this Maven module is putting the **greeter-impl** and **greeter-impl2** jar files into the repo directory, however Maven dependencies of this project are only **jboss-modules** and **greeter-api**:
 
 ```xml
-
-        <dependency>
-            <groupId>modules.demo</groupId>
-            <artifactId>greeter-api</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jboss.modules</groupId>
-            <artifactId>jboss-modules</artifactId>
-            <version>1.7.0.Beta2</version>
-        </dependency>
-
+<dependency>
+    <groupId>modules.demo</groupId>
+    <artifactId>greeter-api</artifactId>
+    <version>${project.version}</version>
+</dependency>
+<dependency>
+    <groupId>org.jboss.modules</groupId>
+    <artifactId>jboss-modules</artifactId>
+    <version>1.7.0.Beta2</version>
+</dependency>
 ```
 
 
