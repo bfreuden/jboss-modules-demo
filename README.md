@@ -5,6 +5,20 @@ The purpose of this demo twofold: evaluate JBoss Modules as a backbone for a plu
 for instance I've not been able to find how to unload a module, to get JBoss module actually close module jars, and to use permissions inside the module descriptor.
 
 
+# Running the demo
+
+First do a compilation that will create the jars and create the JBoss modules directory:
+
+`mvn package -DskipTests`
+
+Then you can run unit tests of the **greeter-app** Maven module.
+Note that the **Test6_SecurityManagerError** test has to be run with the following VM args:
+
+`-Djava.security.manager -Djava.security.policy=security.policy`
+
+
+# Maven modules of the demo
+
 The demo consists in 4 Maven modules.
 
 
@@ -45,11 +59,9 @@ public class EnglishGreeter implements Greeter {
 ```
 
 ## greeter-app Maven module
-This Maven module is actually containing the source code and a **repo** directory containing 1 JBoss Module.
+This Maven module is actually containing the source code of the demo, a **repo** directory containing 1 JBoss Module, and hacked source code of JBoss Modules (in the *org.jboss.modules package*).
 
-The pom of this Maven module is putting the **greeter-impl** and **greeter-impl** jar files into the repo directory.
-
-However Maven dependencies of this project are only **jboss-modules** and **greeter-api**:
+The pom of this Maven module is putting the **greeter-impl** and **greeter-impl** jar files into the repo directory, however Maven dependencies of this project are only **jboss-modules** and **greeter-api**:
 
 ```xml
 
